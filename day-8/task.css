@@ -1,0 +1,61 @@
+/* Selectors */
+
+/* Element Selector */
+p{
+    color: rgb(255, 0, 119);
+    font-size: 28px;
+}
+
+/* ID Selector */
+#unique-style{
+    color: #0fe108;
+    font-size: 22px;
+}
+
+/* Grouping Selector */
+h1, h2, h3{
+    color: rgb(231, 238, 16);
+}
+
+/* Descendant Selector */
+div p{
+    color: hsla(91, 85%, 8%, 0.888);
+    font-size: 38px;
+}
+
+/* Child Selector */
+div > p{
+    color: brown;
+    font-size: 32px;
+}
+
+
+
+/* General Sibling Selector */
+h3 ~ p{
+    color: #140114dd;
+    font-size: 20px;
+}
+
+/* Attribute Selector */
+a[target="_blank"]{
+    color: rgb(29, 165, 17);
+    font-size: 18px;
+}
+
+/* Pseudo-element Selector */
+p::first-letter{
+    color: #0732db;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+/* Universal Selector */
+*{
+    font-family: Arial, sans-serif;
+}
+
+div.box + p{
+    color: #0bc477;
+    font-size: 34px;
+}
