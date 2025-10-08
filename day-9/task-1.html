@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio Website</title>
+        <link rel="stylesheet" href="task-1.css">
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+                <img src="global-network.png" alt="Profile Picture" width="50" height="50" >
+                <nav>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="gallery">gallery</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#media">Media</a>
+                </nav>
+            </header>
+        <div class="container">    
+            <section class="About">
+                <h2>About</h2>
+                <img src="Manohar profile.png" alt="Profile Picture" width="100" height="100">
+                <figcaption>B.Manohar</figcaption>
+                <p>Hello! I'm Manohar, a web developer with a passion for creating beautiful and functional websites.</p> 
+            </section>
+        </div>
+    
+        <section class="Projects">
+            <div class="project-list">
+                <h2>Projects</h2>
+                <table border="1">
+                    <tr>
+                        <th>name</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>website A</td>
+                        <td>web design project</td>
+                    </tr>
+                    <tr>
+                        <td>app </td>
+                        <td>mobile application </td>
+                    </tr>
+                </table> 
+            </div>
+        </section>
+        <div class="skills">
+            <section id="skills">
+                <h2>Skills</h2>
+                <ul>
+                    <li><label for="html">HTML</label></li>
+                    <progress id="html" value="90" max="100">90%</progress><br>
+                    <li><lable for="css">css</lable></li>
+                    <meter id="css" value="80" min="0" max="100">80</meter><br>
+                    <li><lable for="js">java script</lable></li>
+                    <progress id="js" value="70" max="100">70</progress>
+                </ul>
+            </section>
+        </div>
+        
+            <section class="gallery">
+                <h2>gallery</h2>
+                <figure>
+                    <img src="web developmentpic.png" alt="Gallery Image 1" width="400" height="210">
+                    <figcaption>Web development is the work involved in developing a website for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web-based internet applications, electronic businesses, and social network services.</figcaption>
+                </figure>
+                <figure>
+                    <img src="Front-End-Web-Development.png" alt="Gallery Image 2" width="400" height="210">
+                    <figcaption>Web design encompasses many different skills and disciplines in the production and maintenance of websites. The different areas of web design include web graphic design; interface design; authoring, including standardised code and proprietary software; user experience design; and search engine optimization.</figcaption>
+                </figure>
+            </section>
+        
+        <section class="contact">
+            <h2>Contact </h2>
+            <form >
+                <lable for="name">Name:</lable>
+                <input type="text" id="name"><br><br>
+                <lable for="email">Email:</lable>
+                <input type="email" id="email"><br><br>
+                <lable for="number">Phone:</lable>
+                <input type="tel" id="number"><br><br>
+                <textarea rows="4" cols="50" placeholder="Your message here..."></textarea><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+        <section class="blog">
+            <h2>Blog</h2>
+            <article>
+                <h3>My Journey into Web Development</h3>
+                <p>I started learning web development three months ago and have already built several projects. It's been an exciting journey!</p>
+            </article>
+            <article>
+                <h3>Top 5 Web Development Tools</h3>
+                <p>Here are my top 5 tools for web development: VS Code, GitHub, Chrome DevTools, Figma, and Postman.</p>
+            </article>
+            <aside>
+                <h3>Recent Posts</h3>
+                <ul>
+                    <li><a href="#">Understanding Flexbox in CSS</a></li>
+                    <li><a href="#">Getting Started with JavaScript</a></li>
+                    <li><a href="#">Responsive Web Design Basics</a></li>
+                </ul>
+            </aside>
+        </section>
+        <section class="faq">
+            <h2>FAQ</h2>
+            <details>
+                <summary>What is web development?</summary>
+                <p>Web development is the process of creating websites and web applications for the internet.</p>
+            </details>
+            <details>
+                <summary>How long does it take to learn web development?</summary>
+                <p>The time it takes to learn web development varies, but with consistent effort, you can grasp the basics in a few months.</p>
+            </details>
+        </section>
+        <section class="media">
+            <h2>Media</h2>
+            <video width="320" height="240" controls>
+                <source src="6005998_Video_Technology_3840x2160.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <audio controls>
+                <source src="sample-audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+    </body>
+    <footer>
+        <p>&copy; 2025 Manohar's Portfolio. All rights reserved.</p>
+        <p>Gurazala,AP-522415</p>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>    
+    </footer>
+
+</html>
+ 
