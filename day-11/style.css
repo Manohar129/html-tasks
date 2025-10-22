@@ -66,9 +66,9 @@ nav ul li .bt-contact:hover{
     border-radius: 5px;
 }
 nav ul li .active:hover{
-    background-color: #9929fb;
-    color: #ffffff;
-    border-radius: 5px;
+  background-color: #9929fb;
+  color: #ffffff;
+  border-radius:5px;
 
 }
 .hero-1{
@@ -388,9 +388,9 @@ h2 {
 }
 
 .more-btn {
-    position: relative;
-    margin-left: 45%;
-    margin-bottom: 10%;
+  position: relative;
+  margin-left: 45%;
+  margin-bottom: 10%;
 
 }
 
@@ -411,42 +411,43 @@ h2 {
 }
 
 .text-center{
-    display:flex;
-    height: 450px;
-    background-color: oklch(24.097% 0.00759 285.772);
-    padding-left: 25%;
-    padding-right: 25%;
-    padding-top: 2%;
-    margin-bottom: 8%;
+  display:flex;
+  height: 450px;
+  background-color: oklch(24.097% 0.00759 285.772);
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-top: 2%;
+  margin-bottom: 8%;
+  cursor: pointer;
 
 }
 .bold-text{
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-    padding: 0;
-    color: white;
-    max-width: 700px;
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  padding: 0;
+  color: white;
+  max-width: 700px;
 }
 .sm-text{
-    display: flex;
-    justify-content: center;
-    font-size:medium;
-    padding-right: 10%;
-    margin-left: 5%;
-    margin-bottom: 7%;
-    color: rgb(125, 119, 119);
+  display: flex;
+  justify-content: center;
+  font-size:medium;
+  padding-right: 10%;
+  margin-left: 5%;
+  margin-bottom: 7%;
+  color: rgb(125, 119, 119);
 }
 .btn-together{
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    background-color: #9929fb;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-left:30%;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  background-color: #9929fb;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-left:30%;
 
 }
 .blog-section {
@@ -457,15 +458,15 @@ h2 {
   padding: 40px 20px;
 }
 .blog{
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
 }
 .blogcenter{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #c6c0c0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c6c0c0;
 }
 
 .blog-card {
