@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orientation Media Queries</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      font-size: 28px;
+      transition: background-color 0.5s ease;
+      background-color: purple; /* Default (portrait) */
+    }
+
+    /* Landscape Mode */
+    @media (orientation: landscape) {
+      body {
+        background-color: green;
+      }
+    }
+
+    /* Portrait Mode */
+    @media (orientation: portrait) {
+      body {
+        background-color: purple;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rotate Your Device!</h1>
+</body>
+</html>
