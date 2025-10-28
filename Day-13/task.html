@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animations Task</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .box {
+      width: 150px;
+      height: 150px;
+      background-color: #4dabf7;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* Fade In */
+    .fade-in {
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Fade Out */
+    .fade-out {
+      animation: fadeOut 2s ease-in forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* Zoom In */
+    .zoom-in {
+      animation: zoomIn 2s ease-in forwards;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Zoom Out */
+    .zoom-out {
+      animation: zoomOut 2s ease-in forwards;
+    }
+
+    @keyframes zoomOut {
+      from {
+        transform: scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Bounce In */
+    .bounce-in {
+      animation: bounceIn 2s ease-out forwards;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Bounce Out */
+    .bounce-out {
+      animation: bounceOut 2s ease-in forwards;
+    }
+
+    @keyframes bounceOut {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      20% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* Layout grid for all boxes */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 30px;
+      width: 80%;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Animation Effects</h1>
+  <div class="container">
+    <div class="box fade-in">Fade In</div>
+    <div class="box fade-out">Fade Out</div>
+    <div class="box zoom-in">Zoom In</div>
+    <div class="box zoom-out">Zoom Out</div>
+    <div class="box bounce-in">Bounce In</div>
+    <div class="box bounce-out">Bounce Out</div>
+  </div>
+</body>
+</html>
