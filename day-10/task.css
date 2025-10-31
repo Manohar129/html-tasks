@@ -1,0 +1,110 @@
+body{
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+header{
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+.logo img{
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    width: 50px;
+}
+.logo p{
+    font-size: 30px;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 10px;
+}
+nav a{
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+nav a:hover{
+    color: #007bff;
+}
+.abt-img img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.abt-content{
+    width: 600px;
+    margin-left: 20px;
+}
+.abt-content h2{
+    font-size: 30px;
+    color: #fc6a20;
+}
+
+
+
+.code-container{
+    display: flex;
+    background-color: rgb(161, 211, 255);
+    width: 100%;
+}
+.code-container h2{
+    width: 250px;
+}
+.code-container p{
+    width: 600px;
+}
+.code-list li{
+    display: inline;
+}
+
+.blocks-section{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; /* 3 columns of equal width */
+    gap: 10px; /* Space between blocks */
+}
+
+.block1{
+    background-color: #007bff;
+}
+
+.block2{
+    background-color: #00ff6a;
+}
+.block3{
+    background-color: #ffbb00;
+    
+}
+.block4{
+    background-color: #ff00dd;
+    
+}
+.block5{
+    background-color: #ff0015;
+    
+}
+.block6{
+    background-color: #8ef3dd;
+
+}
+
+.block2:hover{
+    background-color: #7e5555;
+    color: #ffffff;
+    box-shadow: 14px 16px 20px 11px rgba(0, 0, 0, 0.2);
+}
