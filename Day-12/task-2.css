@@ -1,0 +1,57 @@
+:root{
+  --light: #f0d9b5;
+  --dark:  #b58863;
+  --board-size: min(80vmin, 640px); /* responsive */
+}
+
+/* Basic page */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  color: #222;
+}
+
+h1 { font-size: 1.1rem; margin: 0; }
+
+/* Board */
+.board {
+  width: var(--board-size);
+  height: var(--board-size);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 1fr;
+  border: 4px solid #333;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Each square */
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--board-size) / 12); /* piece size adjusts with board */
+  user-select: none;
+  line-height: 1;
+  box-sizing: border-box;
+  border: 0.5px solid rgba(0,0,0,0.06);
+}
+
+/* Light / Dark squares (classes assigned in HTML) */
+.square.light { background: var(--light); }
+.square.dark  { background: var(--dark);  }
+
+/* Improve piece legibility */
+.square::selection { background: transparent; }
+.square > * { pointer-events: none; }
+
+/* Hover - highlight square */
+.square:hover {
+  outline: 3px solid rgba(255,255,0,0.18);
+  outline-offset: -3px;
+  cursor: pointer;
+}
+
