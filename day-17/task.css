@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* ---------- Task 1: Overlapping Boxes ---------- */
+.box {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box1 {
+  background: red;
+  top: 100px;
+  left: 100px;
+  z-index: 1; /* Try changing these values */
+}
+
+.box2 {
+  background: blue;
+  top: 130px;
+  left: 130px;
+  z-index: 2;
+}
+
+.box3 {
+  background: green;
+  top: 160px;
+  left: 160px;
+  z-index: 3;
+}
+
+/* ---------- Task 2: Card with Badge ---------- */
+.card {
+  position: relative;
+  width: 200px;
+  padding: 15px;
+  margin-top: 250px;
+  background: #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: crimson;
+  color: white;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+/* ---------- Task 3: Button color change ---------- */
+.color-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.color-btn:hover {
+  background: #0056b3;
+}
+
+.color-btn:active {
+  background: #003d80;
+}
+
+/* ---------- Task 4: First Letter Highlight ---------- */
+p::first-letter {
+  font-size: 28px;
+  color: crimson;
+  font-weight: bold;
+}
+
+/* ---------- Task 5 & 6: Styled List ---------- */
+.styled-list {
+  list-style: none;
+  padding: 0;
+}
+
+.styled-list li {
+  padding: 8px 0;
+  font-size: 18px;
+  position: relative;
+}
+
+/* Alternating Colors */
+.styled-list li:nth-child(odd) {
+  background: #f0f0f0;
+}
+
+.styled-list li:nth-child(even) {
+  background: #dcdcdc;
+}
+
+/* Add emoji before each item */
+.styled-list li::before {
+  content: "👉 ";
+  margin-right: 8px;
+  color: darkblue;
+}
