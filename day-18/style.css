@@ -275,8 +275,15 @@ ul li #bt-contact:hover{
     gap: 30px;
     flex-wrap: wrap;
 }
-.pricing-title .pro-tl h2{
+.pro-tl h2{
     padding-left: 17%;
+    margin-bottom: 40px;
+}
+.pricing-title p{ 
+    padding-left: 17%;
+    margin-bottom: 10px;
+    font-size: 30px;
+    margin-top: 40px;
 }
 
 .card {
@@ -333,7 +340,8 @@ ul li {
     
 }
 
-li::before{
+.pricing-section li::before{
+    content: '✔';
     color: #ff5a3d;
     margin-right: 10px;
     
@@ -378,22 +386,19 @@ li::before{
 .dt-bl{
     background-color: #333333;
 }
-.pricing-title p,h6{
+.pricing-title h6{
     margin-top: 30px;
     margin-bottom: 60px;
     margin-left: 17%;
     
 }
-.pricing-title h6{
+.pricing-titleh h6{
     font-size: 36px;
     font-weight: 800;
 }
 .pricing-title p{
-    color: #ff5733;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-left: 17%;
+    color: #5c5858;
+    margin-bottom: 40px;
     
 }
 .pricing-title{
@@ -441,13 +446,13 @@ li::before{
     color: rgb(24, 22, 22);
     font-size: 20px;
     text-align: center;
-    margin-left: 5%;
+    margin-left: 4%;
 }
 .contact-info h3{
     text-align: center;
     color: tomato;
     font-size: 40px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 .links a{
     color: white;
@@ -469,7 +474,9 @@ li::before{
 .cont-add p{
     color: #333333;
 }
-.links{
+.links {
     text-align: center;
     margin-top: 30px;
+    padding-left: 20px;
+
 }
