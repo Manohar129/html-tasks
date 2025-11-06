@@ -10,6 +10,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
 }
 .logo{
     display: flex;
@@ -45,6 +50,9 @@ ul li #bt-contact:hover{
     background-color: #000;
     color: #ff5733;
     border-radius: 5px;
+}
+.text-center{
+    margin-top: 7%;
 }
 .color-red{
     color: #ff5733;
@@ -109,9 +117,12 @@ ul li #bt-contact:hover{
     line-height: 2.5rem;
 }
 .back-image{
-    background-image:url(bg-peoples.png);
+    background-image:url(bg-peoples.png) ;
     background-repeat: no-repeat;
     background-size: 100%;
+    align-items:flex-end;
+    z-index: 2;
+
 }
 
 .features{
@@ -278,9 +289,6 @@ ul li #bt-contact:hover{
 .pro-tl h2{
     padding-left: 17%;
     margin-bottom: 40px;
-}
-.pricing-title  p{ 
-    
 }
 
 .card {
