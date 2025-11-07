@@ -117,12 +117,10 @@ ul li #bt-contact:hover{
     line-height: 2.5rem;
 }
 .back-image{
-    background-image:url(bg-peoples.png) ;
+    background-image:url(bg-peoples.png)  ;
     background-repeat: no-repeat;
     background-size: 100%;
     align-items:flex-end;
-    z-index: 2;
-
 }
 
 .features{
