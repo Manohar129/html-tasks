@@ -1,9 +1,10 @@
 .flex {
-    padding: 50px 30px 50px 30px;
+    padding: 20px 15px 20px 15px;
     background-color: black;
     justify-content: center;
     align-items: center;
-    margin: 200px;
+    margin-top: 100px;
+    margin-right: 800px;
     border-radius: 20px;
 
 }
@@ -11,18 +12,18 @@
 .row1,
 .row2 {
     display: flex;
-    gap: 30px;
+    gap: 15px;
 }
 
 .col-1 {
-    background-color: crimson;
+    background-color: red;
     width: 30%;
     padding: 40px;
     border-radius: 5px;
 }
 
 .col-2 {
-    background-color: rgb(173, 220, 20);
+    background-color:yellow;
     width: 70%;
     padding: 40px;
     border-radius: 5px;
@@ -35,28 +36,113 @@
     margin-top: 20px;
 }
 
-.r2Col-1 {
-    background-color: rgb(155, 19, 233);
+.purpCol-1 {
+    background-color: purple;
     width: 70%;
     padding: 40px;
     border-radius: 5px;
 }
 
-.r2Col-2 {
-    background-color: crimson;
+.redCol-2 {
+    background-color: red;
     width: 30%;
     padding: 40px;
     border-radius: 5px;
 }
 
-.r3Col-1 {
+.grenCol-1 {
     background-color: green;
     padding: 40px;
     border-radius: 5px;
 }
 
-.r4Col-1 {
+.blueCol-1 {
     background-color: blue;
     padding: 40px;
     border-radius: 5px;
 }
+
+.grid {
+    padding: 20px 15px 20px 15px;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-right: 800px;
+    border-radius: 20px;
+    height: 430px;
+    margin-top: 100px;
+}
+
+.grid1 {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.gr1Col-1 {
+    background-color: black;
+    
+}
+
+.col-11 {
+    background-color: rgb(236, 8, 8);
+    padding: 40px;
+    height: 0px;
+    border-radius: 5px;
+}
+
+.gr1Col-2 {
+
+    background-color: black;
+
+
+}
+
+.col-21 {
+    background-color: yellow;
+    padding: 40px;
+    height: 120px;
+    border-radius: 5px;
+}
+
+
+
+.r2c1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+
+}
+.greenc1{
+    background-color: green;
+    padding: 20px;
+    width: 80px;
+    height: 280px;
+    border-radius: 5px;
+}
+.bluec2{
+    background-color: blue;
+    padding: 20px;
+    width: 80px;
+    margin-left: 25px;
+    height: 160px; 
+    border-radius: 5px;
+}
+.col-22{
+    background-color: red;
+    padding: 40px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.gr3Col-3{
+    background-color: purple;
+    padding: 40px; 
+    margin-left: 180px;
+    bottom:80px;
+    z-index: 0;
+    position: relative;
+    border-radius: 5px;
+}
+
+    
