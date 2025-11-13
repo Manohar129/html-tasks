@@ -54,7 +54,7 @@ for(let color of colors)
     for(let size of sizes)
     {
                  console.log("color = " + color+" Size - " +size)
-    }
+    }
 
 
 }
