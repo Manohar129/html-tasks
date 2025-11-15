@@ -29,7 +29,7 @@ console.log("numbers less than 50:"+ below50);
 
 let numbers = [10, 23, 45, 67, 89, 90, 33, 37, 50, 71, 12, 29, 4];
 
-function isprime(num){
+function isprime(num){ 
     if(num <= 1)
         return false;
     for(let i=2; i<= Math.sqrt(num); i++){
