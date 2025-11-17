@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Tasks</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="task.js"></script>
+
+</head>
+
+<body>
+
+    <h2>JavaScript Tasks</h2>
+
+    <!-- -------CALCULATOR -------->
+    <h3>Calculator</h3>
+    <input type="number" id="num1" placeholder="Enter Number 1">
+    <input type="number" id="num2" placeholder="Enter Number 2">
+
+
+    <button onclick="add()">Add</button>
+    <button onclick="sub()">Subtract</button>
+    <button onclick="mul()">Multiply</button>
+    <button onclick="div()">Divide</button>
+    <button onclick="mod()">Mod</button>
+
+    <p id="result">Result: </p>
+
+    <hr>
+
+    <!------------- LIGHT / DARK MODE ---------------->
+    <h3>Light / Dark Mode</h3>
+    <button onclick="toggleMode()">Toggle Mode</button>
+
+     <hr>
+
+    <!-- ---------------- SHOW / HIDE PARAGRAPH ---------------- -->
+    <h3>Show / Hide Paragraph</h3>
+
+    <p id="myp">This is a sample paragraph to show and hide.</p>
+    <button onclick="showHide()">Show / Hide</button>
+
+    <hr>
+
+    <!-- ---------------- CHARACTER COUNT ---------------- -->
+    <h3>Character Count</h3>
+    <textarea id="txt" rows="2" cols="40" placeholder="Type here..."></textarea>
+    <br><br>
+    <button onclick="countChars()">Show Count</button>
+    <p>Total Characters: <span id="charCount"></span></p>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
