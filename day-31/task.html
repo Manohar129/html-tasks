@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Tasks</title>
+</head>
+<body>
+
+    <h2>1. To-Do List (Add / Delete)</h2>
+    <input id="todoInput" type="text" placeholder="Enter task">
+    <button onclick="addTodo()">Add</button>
+
+    <ul id="todoList"></ul>
+
+    <hr>
+
+    <h2>2. Change Image on Click</h2>
+    <img id="myImage" src="Everest_North.jpg" width="150" onclick="changeImage()">
+
+    <hr>
+
+    <h2>3. Counter (decrease and increase)</h2>
+    <button onclick="decrease()">decrease</button>
+    <span id="count">0</span>
+    <button onclick="increase()">increase</button>
+
+    <hr>
+
+    <h2>4. Password Show / Hide</h2>
+    <input type="password" id="mypassword">
+    <button onclick="togglePassword()">Show / Hide</button>
+
+    <hr>
+
+    <h2>5. Search Filter</h2>
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="filterList()">
+
+    <ul id="items">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+        <li>Mango</li>
+        <li>Pineapple</li>
+    </ul>
+
+<script>
+/* ---------- 1. To-Do List ---------- */ 
+function addTodo() {
+    let input = document.getElementById("todoInput");
+    let list = document.getElementById("todoList");
+
+    if (input.value === "") return;
+
+    let li = document.createElement("li");
+    li.innerHTML = input.value + " <button onclick='this.parentElement.remove()'>Delete</button>";
+    list.appendChild(li);
+
+    input.value = "";
+}
+
+/* ---------- 2. Change Image ---------- */
+function changeImage() {
+    let img = document.getElementById("myImage");
+
+    if (img.src.includes("ff0000")) {
+        img.src = "Everest_North.jpg";
+    } else {
+        img.src = "Trekking-to-Everest-Camp-Trek.webp";
+    }
+}
+
+/* ---------- 3. Counter ---------- */
+let count = 0;
+
+function increase() {
+    count++;
+    document.getElementById("count").innerText = count;
+}
+
+function decrease() {
+    count--;
+    document.getElementById("count").innerText = count;
+}
+
+/* ---------- 4. Password Show/Hide ---------- */
+function togglePassword() {
+    let pwd = document.getElementById("mypassword");
+
+    if (pwd.type === "password") {
+        pwd.type = "text";
+    } else {
+        pwd.type = "password";
+    }
+}
+
+/* ---------- 5. Search Filter ---------- */
+function filterList() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let items = document.querySelectorAll("#items li");
+
+    items.forEach(li => {
+        if (li.innerText.toLowerCase().includes(input)) {
+            li.style.display = "block";
+        } else {
+            li.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
