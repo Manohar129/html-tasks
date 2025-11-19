@@ -1,0 +1,108 @@
+1. To-Do List (Add / Delete)
+HTML Steps
+
+Create an input box for entering tasks.
+
+Add a button labeled “Add Task”.
+
+Create an empty <ul> or <ol> to display the task list.
+
+Each task item will contain the task text + a delete button.
+
+JavaScript Steps
+
+Select the input box, add button, and the list container using document.getElementById or querySelector.
+
+When the Add button is clicked:
+
+Read the value from the input box.
+
+Create a new <li> element.
+
+Add the typed text into it.
+
+Create a delete button and attach it to the <li>.
+
+Append the <li> to the list.
+
+Add a click event on the delete button to remove the corresponding <li>.
+
+Clear the input after adding the task.
+
+2. Change Image on Click
+HTML Steps
+
+Add an <img> tag with a default image.
+
+No other structure needed unless you want multiple images.
+
+JavaScript Steps
+
+Select the <img> element.
+
+Add a click event listener to the image.
+
+When the image is clicked:
+
+Replace the src attribute with a new image link.
+
+Optionally toggle between two images.
+
+3. Counter (+ Increase / - Decrease)
+HTML Steps
+
+Add a text or number display for the counter value.
+
+Add two buttons: Increase (+) and Decrease (–).
+
+JavaScript Steps
+
+Start with a variable like count = 0.
+
+Select the display and the two buttons.
+
+On "+" button click → increase the count and update the display.
+
+On "–" button click → decrease the count and update the display.
+
+4. Password Show / Hide
+HTML Steps
+
+Add an input field with type "password".
+
+Add a button or icon labeled “Show/Hide”.
+
+JavaScript Steps
+
+Select the password input and the show/hide button.
+
+On button click:
+
+If input type is "password" → change to "text" (show password).
+
+If input type is "text" → change back to "password" (hide password).
+
+Optionally change the button text between “Show” and “Hide”.
+
+ 5. Search Filter (Typing → Filter List Items)
+HTML Steps
+
+Add an input box for search text.
+
+Create a list (<ul> or <div>) with items to search/filter.
+
+JavaScript Steps
+
+Select the search input and the list items.
+
+Add a keyup event to the input box.
+
+On each key press:
+
+Read the search text.
+
+Loop through each list item.
+
+If the item text includes the search word → show it.
+
+If not → hide it.
