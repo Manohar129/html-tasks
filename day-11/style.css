@@ -60,7 +60,7 @@ nav ul li .active{
     color: #ffffff;
     border-radius: 5px;
 }
-nav ul li .bt-contact:hover{
+nav ul li .bt-contact:hover{ 
     background-color: #6619a8;
     color: #ffffff;
     border-radius: 5px;
@@ -821,7 +821,7 @@ form textarea {
 .footer-nav nav {
     display: inline;
     margin: 0px 5px;
-
+}
 .footer-container{
     max-width: 1100px;
     margin: 0 auto;
