@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<h2>Font Size Changer</h2>
+
+<p id="text">This is sample text.</p>
+
+<button onclick="increaseFont()">Increase</button>
+<button onclick="decreaseFont()">Decrease</button>
+
+
+
+<h2>QR Code Generator</h2>
+
+<input type="text" id="qrInput" placeholder="Enter text">
+<button onclick="generateQR()">Generate</button>
+<br><br>
+
+<img id="qrImage" width="200">
+
+<h2>Live Search Filter</h2>
+
+<input type="text" id="search" placeholder="Search..." onkeyup="filterList()">
+
+<ul id="items">
+    <li>Apple</li>
+    <li>Banana</li>
+    <li>Carrot</li>
+    <li>Dog</li>
+    <li>Elephant</li>
+</ul>
+
+    
+<h2>Accordion FAQ</h2>
+
+<div class="accordion">
+    <button class="acc-btn">What is HTML?</button>
+    <div class="acc-panel">HTML means HyperText Markup Language.</div>
+
+    <button class="acc-btn">What is JavaScript?</button>
+    <div class="acc-panel">JavaScript is used to make pages interactive.</div>
+
+    <button class="acc-btn">What is CSS?</button>
+    <div class="acc-panel">CSS styles the HTML elements.</div>
+</div>
+
+
+
+
+<script>
+    let size = 16;
+
+    function increaseFont() {
+        size++;
+        document.getElementById("text").style.fontSize = size + "px";
+    }
+
+    function decreaseFont() {
+        size--;
+        document.getElementById("text").style.fontSize = size + "px";
+
+    }
+
+
+    function generateQR() {
+        let data = document.getElementById("qrInput").value;
+        let img = document.getElementById("qrImage");
+
+        img.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + data;
+    }
+
+    function filterList() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let items = document.querySelectorAll("#items li");
+
+        items.forEach(li => {
+            let text = li.textContent.toLowerCase();
+            li.style.display = text.includes(input) ? "block" : "none";
+        });
+    }
+
+
+    
+    let buttons = document.querySelectorAll(".acc-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            let panel = btn.nextElementSibling;
+
+            panel.style.display =
+                panel.style.display === "block" ? "none" : "block";
+        });
+    });
+
+</script>
+
+
+
+
+</script>
+
+
+
+    
+</body>
+</html>
