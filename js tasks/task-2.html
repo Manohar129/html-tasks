@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Buttons</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 40px;
+            font-size: 24px;
+            transition: 0.4s;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="moodText">Click a Mood Button</h1>
+
+    <button onclick="setMood('happy')">Happy</button>
+    <button onclick="setMood('sad')">Sad</button>
+    <button onclick="setMood('angry')">Angry</button>
+    <button onclick="setMood('sleepy')">Sleepy</button>
+
+
+    <script>
+        function setMood(mood) {
+            const text = document.getElementById("moodText");
+
+            if (mood === "happy") {
+                document.body.style.background = "yellow";
+                text.innerHTML = "I am feeling Great! 😊";
+            }
+
+            else if (mood === "sad") {
+                document.body.style.background = "blue";
+                text.innerHTML = "I am feeling down today. 😢";
+            }
+
+            else if (mood === "angry") {
+                document.body.style.background = "red";
+                text.innerHTML = "I am frustrated! 😡";
+            }
+
+            else if (mood === "sleepy") {
+                document.body.style.background = "purple";
+                text.innerHTML = "I need a nap. 😴";
+            }
+        }
+    </script>
+
+</body>
+</html>
