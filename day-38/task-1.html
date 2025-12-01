@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    .light {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 5px;
+      opacity: 0.3;
+    }
+    #red { background: red; }
+    #yellow { background: yellow; }
+    #green { background: green; }
+
+
+    </style>
+</head>
+<body>
+    <!-- 1.Auto Logout after Inactivity -->
+    <h2>Auto Logout Example</h2>
+        <p id="message"></p>
+
+    <!-- 2.Traffic Light Representation -->
+     <h2>Traffic Light Representation</h2>
+    <div id="red" class="light"></div>
+    <div id="yellow" class="light"></div>
+    <div id="green" class="light"></div>
+
+
+<script>
+    let timer = 0;
+
+    let interval = setInterval(() => {
+        timer++;
+
+        if (timer === 25) {
+            document.getElementById("message").innerText = 
+                "⚠️ Warning: You will be logged out in 5 seconds!";
+        }
+
+        if (timer === 30) {
+            document.getElementById("message").innerText = 
+                "⛔ You have been logged out!";
+            clearInterval(interval); // stop timer
+        }
+
+    }, 1000); // runs every 1 second
+
+    
+    let c = 0;
+
+    setInterval(() => {
+        red.style.opacity = 0.3;
+        yellow.style.opacity = 0.3;
+        green.style.opacity = 0.3;
+
+        if (c === 0) red.style.opacity = 1;
+        if (c === 1) yellow.style.opacity = 1;
+        if (c === 2) green.style.opacity = 1;
+
+        c = (c + 1) % 3;
+    }, 1000);
+
+
+</script>
+
+    
+</body>
+</html>
