@@ -111,11 +111,7 @@
 
         // function to add a new task 
         function addTodo() {
-
-            
             if (input.value === "") return;
-
-            
             let li = document.createElement("li");
             li.textContent = input.value;
 
@@ -123,7 +119,6 @@
             let deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
             deleteButton.className = "delBtn";
-
             
             deleteButton.addEventListener("click", function(){
                 li.remove();
