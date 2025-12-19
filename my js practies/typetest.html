@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Typing Test</title>
+</head>
+
+<body>
+
+    <h1>Typing Test</h1>
+
+    <div class="box">
+        <p>
+            JavaScript is a powerful language used to create dynamic and interactive web pages.
+            It runs in the browser and can also be used on the server side using Node.js.
+            JavaScript allows developers to handle events, manipulate the DOM, and update content dynamically.
+            It supports variables, functions, objects, and modern features like ES6.
+        </p>
+
+    </div>
+
+    <textarea id="input" placeholder="Start typing here..." disabled></textarea>
+
+    <p>Time Left: <span id="time">120</span> seconds</p>
+    <p>Words Typed: <span id="words">0</span></p>
+    <p>WPM: <span id="wpm">0</span></p>
+
+    <button onclick="startTest()">Start</button>
+    <button onclick="stopTest()">Stop</button>
+
+    <script>
+        const INITIAL_TIME = 120;
+        let time = INITIAL_TIME;
+        let timerId = null;
+        let wordsTyped = 0;
+
+        function startTest() {
+            clearInterval(timerId);
+
+            time = INITIAL_TIME;
+            document.getElementById("time").innerText = time;
+
+            document.getElementById("input").disabled = false;
+            document.getElementById("input").value = "";
+            document.getElementById("input").focus();
+
+            document.getElementById("words").innerText = 0;
+            document.getElementById("wpm").innerText = 0;
+
+            timerId = setInterval(function () {
+                if (time > 0) {
+                    time--;
+                    document.getElementById("time").innerText = time;
+                } else {
+                    stopTest();
+                    alert("Time up!");
+                }
+            }, 1000);
+        }
+
+        function stopTest() {
+            clearInterval(timerId);
+            document.getElementById("input").disabled = true;
+        }
+
+        document.getElementById("input").addEventListener("input", function () {
+            let text = this.value.trim();
+
+            wordsTyped = text === "" ? 0 : text.split(" ").length;
+            document.getElementById("words").innerText = wordsTyped;
+
+            let timeUsed = (INITIAL_TIME - time) / 60;
+            let wpm = timeUsed > 0 ? Math.round(wordsTyped / timeUsed) : 0;
+
+            document.getElementById("wpm").innerText = wpm;
+        });
+    </script>
+
+</body>
+</html>
