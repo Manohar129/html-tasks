@@ -24,13 +24,27 @@
     gap: 10px;
     text-align: center;
     background-color: #d4e2e6;
-    height: 70vh;
+    height: auto;
 
     
 }
-..content-area{
-    text-align: right;
+
+ul li {
+    list-style: none;
+    padding: 10px 0px;
+    font: 1em sans-serif;
+}
+ul li:active {
+    font-weight: bold;
+    color: #464646;
+}
+ul li:hover {
+    color: rgb(121, 104, 104);
+    cursor: pointer;
+}
+.content-area{
     padding: 20px;
+    padding-right: 10px;
 
 }
 .content-area h2 {
@@ -42,7 +56,7 @@
 
 .content-area p {
     font-size: 1rem;
-    color: #c2bdbd;
+    color: #4b4a4a;
     line-height: 1.5;
     margin-bottom: 30px;
     padding-left: 20px;
@@ -51,8 +65,24 @@
 .stats-1{
     width: 100%;
     height: 150px;
-    background-color: #333;
-
-
+    background-color: #f5f1f1;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+    text-align: start;
 }
 
+.stats-2{
+    width: 100;
+    height: 150px;
+    background-color: #f5f1f1;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #395f6e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
