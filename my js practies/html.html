@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skill Bars</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #fafafa;
+        padding: 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .skills {
+        display: flex;
+        gap: 50px;
+        align-items: flex-end;
+    }
+
+    .skill {
+        text-align: center;
+    }
+
+    .outer {
+        height: 200px;
+        width: 200px;
+        background-color: #fafafa;
+        position: relative;
+        border: 1px solid #e0e0e0;
+    }
+
+    .inner {
+        width: 100%;
+        background-color: rgb(238, 222, 2);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .h45 { height: 45%; }
+    .h61 { height: 61%; }
+    .h76 { height: 76%; }
+
+    .title {
+        margin-top: 15px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .percent {
+        margin-top: 5px;
+        font-size: 18px;
+        color: #2c3e50;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="skills">
+
+    <div class="skill">
+        <div class="outer">
+            <div class="inner h45"></div>
+        </div>
+        <div class="title">Development</div>
+        <div class="percent">45%</div>
+    </div>
+
+    <div class="skill">
+        <div class="outer">
+            <div class="inner h61"></div>
+        </div>
+        <div class="title">Marketing</div>
+        <div class="percent">61%</div>
+    </div>
+
+    <div class="skill">
+        <div class="outer">
+            <div class="inner h76"></div>
+        </div>
+        <div class="title">Consulting</div>
+        <div class="percent">76%</div>
+    </div>
+
+</div>
+
+</body>
+</html
