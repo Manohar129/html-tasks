@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster Pro | Mahvas Couture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- BRAND VARIABLES --- */
+        :root {
+            --primary: #581845; /* Brand Purple */
+            --accent: #fac001;  /* Brand Gold */
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --danger: #e74c3c;
+            --success: #27ae60;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+
+        .container {
+            background: var(--white);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        /* --- INPUT SECTION --- */
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .main-input {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 0 15px;
+            transition: 0.3s;
+        }
+
+        .main-input:focus-within { border-color: var(--primary); background: #fff; }
+
+        .main-input i { color: var(--primary); margin-right: 10px; }
+
+        #todoInput {
+            border: none;
+            background: transparent;
+            padding: 12px 0;
+            width: 100%;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .options-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .select-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+        }
+
+        .select-group i { color: #888; font-size: 14px; margin-right: 8px; }
+
+        select, input[type="date"] {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 13px;
+            color: #444;
+            cursor: pointer;
+        }
+
+        #addBtn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #addBtn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- STATS BAR --- */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #fdfdfd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            border: 1px dashed #ddd;
+        }
+
+        /* --- TASK LIST ITEMS --- */
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        li {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        li:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: var(--primary); }
+
+        .task-info { flex: 1; }
+
+        .meta-row { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+
+        .category-tag { font-size: 10px; background: #eee; padding: 2px 6px; border-radius: 4px; color: #555; }
+
+        .priority-badge { font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+        .priority-High { background: #ffebee; color: #c62828; }
+        .priority-Medium { background: #fffde7; color: #f9a825; }
+        .priority-Low { background: #e8f5e9; color: #2e7d32; }
+
+        .task-text { font-size: 16px; color: #333; font-weight: 500; cursor: pointer; }
+        .task-text.completed { text-decoration: line-through; color: #aaa; }
+
+        .due-date { font-size: 11px; color: #999; margin-top: 4px; display: block; }
+
+        /* --- ACTION BUTTONS --- */
+        .actions { display: flex; gap: 10px; }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.2s;
+            padding: 5px;
+        }
+
+        .check-btn { color: var(--success); }
+        .edit-btn { color: #3498db; }
+        .del-btn { color: var(--danger); }
+
+        .btn-icon:hover { transform: scale(1.2); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2><i class="fa-solid fa-crown"></i> TaskMaster </h2>
+
+    <div class="input-section">
+        <div class="main-input">
+            <i class="fa-solid fa-pen-nib"></i>
+            <input id="todoInput" type="text" placeholder="Enter new task...">
+        </div>
+        
+        <div class="options-row">
+            <div class="select-group">
+                <i class="fa-solid fa-folder-open"></i>
+                <select id="categoryInput">
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+
+                    <option value="Urgent">Urgent</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <i class="fa-solid fa-flag"></i>
+                <select id="priorityInput">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <i class="fa-solid fa-calendar-day"></i>
+                <input type="date" id="dateInput">
+            </div>
+        </div>
+        
+        <button id="addBtn"><i class="fa-solid fa-plus"></i> Create Task</button>
+    </div>
+
+    <div class="stats">
+        <span><i class="fa-solid fa-list-check"></i> Active: <b id="totalCount">0</b></span>
+        <span><i class="fa-solid fa-circle-check"></i> Done: <b id="completedCount">0</b></span>
+    </div>
+
+    <ul id="todoList"></ul>
+</div>
+
+<script>
+    const input = document.getElementById("todoInput");
+    const categoryInput = document.getElementById("categoryInput");
+    const priorityInput = document.getElementById("priorityInput");
+    const dateInput = document.getElementById("dateInput");
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("todoList");
+    const totalCount = document.getElementById("totalCount");
+    const completedCount = document.getElementById("completedCount");
+
+    // Load Data from "Backend" (LocalStorage)
+    let tasks = JSON.parse(localStorage.getItem("mahvas_tasks")) || [];
+
+    // Initial UI Render
+    renderTasks();
+
+    // ADD TASK LOGIC
+    addBtn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (valCheck(text)) {
+            const newTask = {
+                id: Date.now(),
+                text: text,
+                category: categoryInput.value,
+                priority: priorityInput.value,
+                date: dateInput.value || "No Deadline",
+                completed: false
+            };
+            tasks.push(newTask);
+            saveAndRefresh();
+            input.value = "";
+        }
+    });
+
+    // Enter Key Listener
+    input.addEventListener("keypress", (e) => { if(e.key === "Enter") addBtn.click(); });
+
+    // RENDER ENGINE
+    function renderTasks() {
+        list.innerHTML = "";
+        let completedNum = 0;
+
+        tasks.sort((a, b) => b.id - a.id).forEach(task => {
+            if(task.completed) completedNum++;
+
+            const li = document.createElement("li");
+            
+            // Dynamic category icons
+            const catIcons = {
+                Work: 'fa-briefcase',
+                Shopping: 'fa-cart-shopping',
+                Personal: 'fa-house',
+                Urgent: 'fa-bolt'
+            };
+
+            li.innerHTML = `
+                <div class="task-info">
+                    <div class="meta-row">
+                        <span class="category-tag"><i class="fa-solid ${catIcons[task.category]}"></i> ${task.category}</span>
+                        <span class="priority-badge priority-${task.priority}">${task.priority}</span>
+                    </div>
+                    <div class="task-text ${task.completed ? 'completed' : ''}" onclick="toggleComplete(${task.id})">
+                        ${task.text}
+                    </div>
+                    <small class="due-date"><i class="fa-regular fa-clock"></i> ${task.date}</small>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn-icon check-btn" onclick="toggleComplete(${task.id})" title="Status">
+                        <i class="fa-solid ${task.completed ? 'fa-circle-check' : 'fa-circle'}"></i>
+                    </button>
+                    <button class="btn-icon edit-btn" onclick="editTask(${task.id})" title="Edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="btn-icon del-btn" onclick="deleteTask(${task.id})" title="Delete">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+
+        totalCount.textContent = tasks.length;
+        completedCount.textContent = completedNum;
+    }
+
+    // TASK ACTIONS
+    function toggleComplete(id) {
+        tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+        saveAndRefresh();
+    }
+
+    function deleteTask(id) {
+        if(confirm("Delete this task?")) {
+            tasks = tasks.filter(t => t.id !== id);
+            saveAndRefresh();
+        }
+    }
+
+    function editTask(id) {
+        const task = tasks.find(t => t.id === id);
+        const newText = prompt("Update your task:", task.text);
+        if (newText && newText.trim() !== "") {
+            task.text = newText.trim();
+            saveAndRefresh();
+        }
+    }
+
+    // REUSABLE HELPER FUNCTIONS
+    function saveAndRefresh() {
+        localStorage.setItem("mahvas_tasks", JSON.stringify(tasks));
+        renderTasks();
+    }
+
+    function valCheck(str) {
+        if(!str) { alert("Please enter a task name!"); return false; }
+        return true;
+    }
+</script>
+
+</body>
+</html>
