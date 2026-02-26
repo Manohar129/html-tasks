@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Master Quiz</title>
+    <style>
+        /* 1. Background & Box Design */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .quiz-card {
+            background: #ffffff;
+            width: 400px;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 2. Login Page Styling */
+        #login-screen input {
+            width: 80%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 2px solid #edeff2;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        #login-screen input:focus { border-color: #0072ff; }
+
+        .start-btn {
+            background: #0072ff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .start-btn:hover { background: #0056b3; }
+
+        /* 3. Quiz Header Styling */
+        .user-name-display {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #timer { font-size: 1.1rem; font-weight: bold; color: #ff4757; margin-bottom: 10px; }
+        #question { font-size: 1.3rem; margin-bottom: 20px; }
+
+        .option-btn {
+            display: block; width: 100%; padding: 12px;
+            margin: 10px 0; border: 2px solid #edeff2;
+            border-radius: 12px; background: none;
+            cursor: pointer; transition: 0.2s;
+        }
+
+        .option-btn:hover { background: #f1f2f6; border-color: #0072ff; }
+
+        .hidden { display: none; }
+
+        /* 4. Celebration Animation */
+        .confetti {
+            position: absolute; width: 10px; height: 10px;
+            top: -10px; border-radius: 2px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="confetti-container"></div>
+
+    <div class="quiz-card">
+        <div id="login-screen">
+            <h1>Welcome!</h1>
+            <p>Enter your name to start the quiz</p>
+            <input type="text" id="user-input" placeholder="Your Name here..." />
+            <br>
+            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div id="quiz-ui" class="hidden">
+            <div class="user-name-display">Player: <span id="display-name" style="color:#0072ff;"></span></div>
+            <div id="timer">Time Left: 60s</div>
+            <h2 id="question">Loading Question...</h2>
+            <div id="options"></div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <div id="celebration-msg"></div>
+            <h1>Well Done!</h1>
+            <p style="font-size: 1.2rem"><span id="finish-name"></span>, your score is:</p>
+            <p style="font-size: 2rem; font-weight: bold;"><span id="final-score">0</span>/5</p>
+            <button class="start-btn" onclick="location.reload()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Which tag is used for the largest heading?", a: ["h6", "heading", "h1", "head"], correct: 2 },
+            { q: "What does CSS stand for?", a: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets"], correct: 1 },
+            { q: "Which property changes text color?", a: ["text-color", "color", "font-style"], correct: 1 },
+            { q: "Which symbol is used for IDs in CSS?", a: [".", "#", "&"], correct: 1 },
+            { q: "Inside which HTML element do we put JavaScript?", a: ["<js>", "<scripting>", "<script>"], correct: 2 }
+        ];
+
+        let currentIdx = 0, score = 0, timeLeft = 60, timer, userName = "";
+
+        // Function to start the quiz after entering name
+        function startQuiz() {
+            const input = document.getElementById("user-input").value;
+            if (input.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            userName = input;
+            
+            // UI Transition
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("quiz-ui").classList.remove("hidden");
+            document.getElementById("display-name").innerText = userName;
+
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").innerText = `Time Left: ${timeLeft}s`;
+                if (timeLeft <= 0) endQuiz();
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (currentIdx >= questions.length) return endQuiz();
+            const qData = questions[currentIdx];
+            document.getElementById("question").innerText = qData.q;
+            const optDiv = document.getElementById("options");
+            optDiv.innerHTML = "";
+            qData.a.forEach((opt, i) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt;
+                btn.onclick = () => {
+                    if (i === qData.correct) score++;
+                    currentIdx++;
+                    loadQuestion();
+                };
+                optDiv.appendChild(btn);
+            });
+        }
+
+        function endQuiz() {
+            clearInterval(timer);
+            document.getElementById("quiz-ui").classList.add("hidden");
+            document.getElementById("result-screen").classList.remove("hidden");
+            document.getElementById("final-score").innerText = score;
+            document.getElementById("finish-name").innerText = userName;
+
+            if (score === 5) celebrate();
+        }
+
+        function celebrate() {
+            document.getElementById("celebration-msg").innerHTML = "<h2 style='color:#2ed573;'>🏆 PERFECT SCORE! 🏆</h2>";
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.animationDelay = Math.random() * 3 + "s";
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.getElementById("confetti-container").appendChild(confetti);
+            }
+        }
+    </script>
+</body>
+</html>
