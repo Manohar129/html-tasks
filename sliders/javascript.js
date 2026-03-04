@@ -41,8 +41,8 @@ prevBtn.addEventListener("click", () => {
     resetTimer();
 });
 
-// Auto Slide Logic
-let autoSlide = setInterval(moveRight, 4000); // 4 seconds for reading time
+
+let autoSlide = setInterval(moveRight, 4000); 
 
 function resetTimer() {
     clearInterval(autoSlide);
