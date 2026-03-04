@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="weather.css">
+</head>
+<body>
+
+    <div id="loader" class="loading-overlay"><i class="fas fa-spinner fa-spin fa-3x" style="color:var(--primary)"></i></div>
+
+    <aside>
+        <div class="logo-area"><i class="fa-solid fa-cloud-sun"></i> Weather</div>
+        <ul class="nav-list">
+            <li class="nav-item active"><i class="fa-solid fa-house"></i> Today</li>
+            <li class="nav-item"><i class="fa-solid fa-clock"></i> Hourly</li>
+            <li class="nav-item"><i class="fa-solid fa-calendar-days"></i> Daily</li>
+            <li class="nav-item"><i class="fa-solid fa-wind"></i> Air Quality</li>
+        </ul>
+    </aside>
+
+    <main>
+        <header>
+            <h2 id="displayCity">Loading...</h2>
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Search City (e.g. Hyderabad)">
+                <i class="fa-solid fa-magnifying-glass" onclick="getWeather()"></i>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <div class="main-card">
+                <div>
+                    <div class="city-label" id="heroLocation">--</div>
+                    <div class="temp-val" id="heroTemp">--°</div>
+                    <div style="color: var(--primary); font-weight: 600;" id="heroDesc">Fetching data...</div>
+                </div>
+                <i class="fa-solid fa-sun" style="font-size: 6rem; color: #fbbf24;"></i>
+            </div>
+
+            <div class="stats-grid">
+                <div class="small-card">
+                    <div class="label">Wind Speed</div>
+                    <div class="value" id="statWind">-- km/h</div>
+                </div>
+                <div class="small-card">
+                    <div class="label">Direction</div>
+                    <div class="value" id="statDir">--°</div>
+                </div>
+                <div class="small-card">
+                    <div class="label">Update Time</div>
+                    <div class="value" id="statTime">--:--</div>
+                </div>
+            </div>
+
+            <div class="forecast-section">
+                <h3>5-Day Forecast</h3>
+                <table id="forecastTable">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>High</th>
+                            <th>Low</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="forecastBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Start with New Delhi automatically
+        window.onload = () => getWeather('New Delhi');
+
+        async function getWeather(cityOverride) {
+            const input = document.getElementById('cityInput');
+            const city = cityOverride || input.value;
+            if (!city) return;
+
+            document.getElementById('loader').style.display = 'flex';
+
+            try {
+                // 1. Get Coordinates
+                const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`);
+                const geoData = await geoRes.json();
+
+                if (!geoData.results) {
+                    alert("City not found. Try a different name.");
+                    return;
+                }
+
+                const loc = geoData.results[0];
+
+                // 2. Get Weather
+                const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=auto`);
+                const weatherData = await weatherRes.json();
+
+                updateDashboard(loc, weatherData);
+            } catch (error) {
+                console.error("API Error:", error);
+                alert("Connection failed. Check your internet.");
+            } finally {
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+
+        function updateDashboard(loc, data) {
+            const current = data.current_weather;
+            
+            // Update Header & Hero
+            document.getElementById('displayCity').innerText = loc.name;
+            document.getElementById('heroLocation').innerText = `${loc.name}, ${loc.admin1 || 'India'}`;
+            document.getElementById('heroTemp').innerText = Math.round(current.temperature) + "°";
+            document.getElementById('heroDesc').innerText = "Current Conditions";
+            
+            // Update Stats
+            document.getElementById('statWind').innerText = current.windspeed + " km/h";
+            document.getElementById('statDir').innerText = current.winddirection + "°";
+            document.getElementById('statTime').innerText = current.time.split('T')[1];
+
+            // Update Table
+            let tableHTML = '';
+            for(let i=1; i<6; i++) {
+                const dayDate = new Date(data.daily.time[i]);
+                const dayName = dayDate.toLocaleDateString('en-US', {weekday: 'long'});
+                tableHTML += `
+                    <tr>
+                        <td>${dayName}</td>
+                        <td>${data.daily.temperature_2m_max[i]}°C</td>
+                        <td>${data.daily.temperature_2m_min[i]}°C</td>
+                        <td><i class="fa-solid fa-cloud-sun"></i></td>
+                    </tr>
+                `;
+            }
+            document.getElementById('forecastBody').innerHTML = tableHTML;
+        }
+
+        // Search on Enter Key
+        document.getElementById('cityInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getWeather();
+        });
+    </script>
+</body>
+</html>
