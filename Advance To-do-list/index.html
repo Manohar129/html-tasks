@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskOS | Advanced Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="app-container">
+    <aside class="sidebar">
+        <h2><i class="fa-solid fa-calendar-check"></i> TaskOS</h2>
+        <div class="input-group">
+            <label>Task Description</label>
+            <input type="text" id="taskInput" placeholder="Enter task Name...">
+            
+            <label>Date & Time</label>
+            <input type="datetime-local" id="dateInput">
+            
+            <button onclick="addTask()" class="add-btn">Add Task</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="dashboard-header">
+            <h1 id="currentMonth">March 2026</h1>
+            <div class="stats">Total Tasks: <span id="taskCount">0</span></div>
+        </header>
+
+        <div class="dashboard-grid">
+            <section class="card timeline-section">
+                <h3><i class="fa-regular fa-clock"></i> Hourly Updates</h3>
+                <div id="hourlyList" class="scroll-area"></div>
+            </section>
+
+            <section class="card calendar-section">
+                <h3><i class="fa-solid fa-calendar-days"></i> Calendar</h3>
+                <div class="calendar-grid" id="calendarGrid">
+                    </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
