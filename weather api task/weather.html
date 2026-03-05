@@ -100,7 +100,7 @@
                 const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=auto`);
                 const weatherData = await weatherRes.json();
 
-                updateDashboard(loc, weatherData);
+            updateDashboard(loc, weatherData);
             } catch (error) {
                 console.error("API Error:", error);
                 alert("Connection failed. Check your internet.");
@@ -112,18 +112,18 @@
         function updateDashboard(loc, data) {
             const current = data.current_weather;
             
-            // Update Header & Hero
+            
             document.getElementById('displayCity').innerText = loc.name;
             document.getElementById('heroLocation').innerText = `${loc.name}, ${loc.admin1 || 'India'}`;
             document.getElementById('heroTemp').innerText = Math.round(current.temperature) + "°";
             document.getElementById('heroDesc').innerText = "Current Conditions";
             
-            // Update Stats
+            
             document.getElementById('statWind').innerText = current.windspeed + " km/h";
             document.getElementById('statDir').innerText = current.winddirection + "°";
             document.getElementById('statTime').innerText = current.time.split('T')[1];
 
-            // Update Table
+            
             let tableHTML = '';
             for(let i=1; i<6; i++) {
                 const dayDate = new Date(data.daily.time[i]);
@@ -140,7 +140,7 @@
             document.getElementById('forecastBody').innerHTML = tableHTML;
         }
 
-        // Search on Enter Key
+        
         document.getElementById('cityInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') getWeather();
         });
