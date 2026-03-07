@@ -25,7 +25,7 @@ function handleAuth() {
             const user = JSON.parse(savedData);
             if (user.password === pass) {
                 alert(`Welcome back, ${user.fname}! Login Successful.`);
-                window.location.href = "store.html";
+                window.location.href = "/E-commerce-admin/index.html";
             } else {
                 alert("Incorrect password.");
             }
