@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DesignFrame – AI Creative Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c14; --sidebar: #0f1220; --panel: #151929; --border: #1e2438;
+    --accent: #4f8ef7; --accent2: #7c3aed; --accent3: #06d6a0;
+    --text: #e2e8f8; --muted: #4a5378; --danger: #ef4444;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Syne',sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+  
+  .topbar { height:48px; background:var(--sidebar); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 20px; gap:16px; }
+  .logo { font-size:18px; font-weight:800; letter-spacing:-0.5px; }
+  .logo span { color:var(--accent); }
+  .topbar-actions { margin-left:auto; display:flex; gap:8px; align-items:center; }
+  .topbar-btn { background:var(--panel); border:1px solid var(--border); color:var(--muted); padding:5px 12px; border-radius:6px; font-size:12px; cursor:pointer; font-family:'Space Mono',monospace; }
+  .res-badge { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); background:var(--panel); border:1px solid var(--border); padding:4px 10px; border-radius:4px; }
+
+  .main { display:flex; flex:1; overflow:hidden; }
+  .sidebar { width:250px; background:var(--sidebar); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow-y:auto; padding:16px; gap:20px; }
+  
+  .sec { font-size:10px; font-family:'Space Mono',monospace; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .sec::after { content:''; flex:1; height:1px; background:var(--border); }
+  
+  .ai-textarea { width:100%; background:var(--panel); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:12px; padding:10px; resize:none; height:80px; outline:none; }
+  .btn-primary { width:100%; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:white; padding:10px; border-radius:8px; font-weight:600; cursor:pointer; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .shape-grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+  .shape-btn { background:var(--panel); border:1px solid var(--border); color:var(--text); padding:8px; border-radius:6px; font-size:11px; cursor:pointer; }
+
+  .canvas-area { flex:1; display:flex; align-items:center; justify-content:center; background:var(--bg); background-image:radial-gradient(circle at 1px 1px,#1e2438 1px,transparent 0); background-size:24px 24px; }
+  #mainCanvas { background:white; border-radius:12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); cursor: crosshair; }
+  
+  .loading-overlay { position:absolute; inset:0; background:rgba(10,12,20,0.8); display:none; align-items:center; justify-content:center; border-radius:12px; z-index:100; flex-direction:column; }
+  .loading-overlay.show { display:flex; }
+  .spinner { width:30px; height:30px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  .props-panel { width:200px; background:var(--sidebar); border-left:1px solid var(--border); padding:16px; display:flex; flex-direction:column; gap:12px; }
+  .prop-input { background:var(--panel); border:1px solid var(--border); border-radius:4px; color:white; padding:5px; width:100%; font-size:12px; }
+  
+  .notif { position:fixed; bottom:20px; right:20px; background:var(--panel); border:1px solid var(--accent3); color:var(--accent3); padding:10px 20px; border-radius:8px; font-size:12px; transform:translateY(100px); transition:0.3s; z-index:1000; }
+  .notif.show { transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">Design<span>Frame</span></div>
+  <div class="topbar-actions">
+    <button class="topbar-btn" onclick="setRes(600,450)">600×450</button>
+    <button class="topbar-btn" onclick="setRes(1080,1080)">Square</button>
+    <div class="res-badge" id="resBadge">600 × 450 px</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="sidebar">
+    <div>
+      <div class="sec">✦ AI Generator</div>
+      <textarea class="ai-textarea" id="aiPrompt" placeholder="Imagine something..."></textarea>
+      <button class="btn-primary" id="genBtn" onclick="generateImage()" style="margin-top:8px">✨ Generate</button>
+    </div>
+
+    <div>
+      <div class="sec">◈ Shapes</div>
+      <div class="shape-grid">
+        <button class="shape-btn" onclick="addShape('rect')">Rectangle</button>
+        <button class="shape-btn" onclick="addShape('circle')">Circle</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec">T Text</div>
+      <input class="prop-input" id="textInput" value="Double Click to Edit" style="margin-bottom:8px">
+      <button class="shape-btn" style="width:100%" onclick="addText()">Add Text Layer</button>
+    </div>
+
+    <div style="margin-top:auto">
+      <button class="btn-primary" style="background:var(--accent3); color:#000" onclick="downloadFrame()">↓ Download</button>
+      <button onclick="clearCanvas()" style="width:100%; margin-top:8px; background:none; border:1px solid var(--danger); color:var(--danger); padding:8px; border-radius:6px; cursor:pointer">Clear</button>
+    </div>
+  </div>
+
+  <div class="canvas-area">
+    <div style="position:relative">
+      <canvas id="mainCanvas" width="600" height="450"></canvas>
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div style="margin-top:10px; font-size:12px; color:var(--accent)">AI is painting...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="props-panel">
+    <div class="sec">Properties</div>
+    <div id="propControls" style="display:none">
+      <label style="font-size:10px; color:var(--muted)">Fill Color</label>
+      <input type="color" id="fillColor" oninput="updateProp('fill', this.value)" style="width:100%; margin-bottom:10px">
+      <label style="font-size:10px; color:var(--muted)">Opacity</label>
+      <input type="range" min="0" max="100" oninput="updateProp('opacity', this.value/100)" style="width:100%">
+    </div>
+    <div class="sec">Layers</div>
+    <div id="layersList" style="font-size:11px; color:var(--muted)">No layers yet</div>
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+let objects = [], selected = null, dragging = false, resizing = false;
+let cW = 600, cH = 450;
+
+// Render Loop
+function render() {
+  ctx.clearRect(0, 0, cW, cH);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, cW, cH);
+
+  objects.forEach(o => {
+    ctx.save();
+    ctx.globalAlpha = o.opacity || 1;
+    
+    if (o.type === 'image' && o.ready) {
+      ctx.drawImage(o.img, o.x, o.y, o.w, o.h);
+    } else if (o.type === 'rect') {
+      ctx.fillStyle = o.fill;
+      ctx.fillRect(o.x, o.y, o.w, o.h);
+    } else if (o.type === 'circle') {
+      ctx.fillStyle = o.fill;
+      ctx.beginPath();
+      ctx.ellipse(o.x + o.w/2, o.y + o.h/2, o.w/2, o.h/2, 0, 0, Math.PI*2);
+      ctx.fill();
+    } else if (o.type === 'text') {
+      ctx.fillStyle = o.fill;
+      ctx.font = "bold 30px Syne";
+      ctx.fillText(o.text, o.x, o.y + 30);
+    }
+
+    if (o === selected) {
+      ctx.strokeStyle = '#4f8ef7';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(o.x - 2, o.y - 2, o.w + 4, o.h + 4);
+    }
+    ctx.restore();
+  });
+  updateLayerUI();
+}
+
+// AI Image Generation
+async function generateImage() {
+  const prompt = document.getElementById('aiPrompt').value.trim();
+  if (!prompt) return notify('Please enter a description!');
+
+  const btn = document.getElementById('genBtn');
+  const overlay = document.getElementById('loadingOverlay');
+  
+  btn.disabled = true;
+  overlay.classList.add('show');
+
+  const img = new Image();
+  // CRITICAL: anonymous allows the canvas to download the image later
+  img.crossOrigin = "anonymous"; 
+  
+  const seed = Math.floor(Math.random() * 10000);
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${cW}&height=${cH}&nologo=true&seed=${seed}`;
+
+  img.onload = () => {
+    const layer = {
+      id: Date.now(),
+      type: 'image',
+      img: img,
+      ready: true,
+      x: 0, y: 0, w: cW, h: cH,
+      opacity: 1
+    };
+    // Add to layers (putting it at the back)
+    objects.unshift(layer);
+    selected = layer;
+    overlay.classList.remove('show');
+    btn.disabled = false;
+    render();
+    notify('AI Image Created!');
+  };
+}
+
+function addShape(type) {
+  const o = { id: Date.now(), type, x: 50, y: 50, w: 100, h: 100, fill: '#4f8ef7', opacity: 1 };
+  objects.push(o);
+  selected = o;
+  render();
+}
+
+function addText() {
+  const val = document.getElementById('textInput').value;
+  const o = { id: Date.now(), type: 'text', text: val, x: 50, y: 50, w: 200, h: 40, fill: '#000000', opacity: 1 };
+  objects.push(o);
+  selected = o;
+  render();
+}
+
+// Interaction Logic
+canvas.onmousedown = e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (cW / rect.width);
+  const my = (e.clientY - rect.top) * (cH / rect.height);
+
+  selected = [...objects].reverse().find(o => mx > o.x && mx < o.x + o.w && my > o.y && my < o.y + o.h);
+  if (selected) {
+    dragging = true;
+    document.getElementById('propControls').style.display = 'block';
+  } else {
+    document.getElementById('propControls').style.display = 'none';
+  }
+  render();
+};
+
+window.onmousemove = e => {
+  if (!selected || !dragging) return;
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (cW / rect.width);
+  const my = (e.clientY - rect.top) * (cH / rect.height);
+  selected.x = mx - selected.w/2;
+  selected.y = my - selected.h/2;
+  render();
+};
+
+window.onmouseup = () => dragging = false;
+
+// Properties and UI
+function updateProp(prop, val) {
+  if (selected) {
+    selected[prop] = val;
+    render();
+  }
+}
+
+function updateLayerUI() {
+  const list = document.getElementById('layersList');
+  if (objects.length === 0) {
+    list.innerHTML = "No layers yet";
+    return;
+  }
+  list.innerHTML = objects.slice().reverse().map(o => `
+    <div style="padding:5px; background:${o === selected ? 'var(--accent)' : 'var(--panel)'}; color:${o === selected ? '#000' : '#fff'}; border-radius:4px; margin-bottom:4px; cursor:pointer">
+      ${o.type.toUpperCase()}
+    </div>
+  `).join('');
+}
+
+function downloadFrame() {
+  try {
+    const link = document.createElement('a');
+    link.download = 'designframe-art.png';
+    // This works because crossOrigin was set to anonymous
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    notify('Download Started!');
+  } catch (e) {
+    console.error(e);
+    alert("Browser blocked download. Try right-clicking the canvas to save.");
+  }
+}
+
+function setRes(w, h) {
+  cW = w; cH = h;
+  canvas.width = w; canvas.height = h;
+  document.getElementById('resBadge').textContent = `${w} × ${h} px`;
+  render();
+}
+
+function clearCanvas() {
+  objects = [];
+  selected = null;
+  render();
+  notify('Canvas Cleared');
+}
+
+function notify(msg) {
+  const n = document.getElementById('notif');
+  n.textContent = '✓ ' + msg;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 2500);
+}
+
+render();
+</script>
+</body>
+</html>
