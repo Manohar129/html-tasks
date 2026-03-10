@@ -1,0 +1,99 @@
+
+  :root {
+    --bg: #05070a;
+    --panel: #0f121d;
+    --accent: #4f8ef7;
+    --glow: rgba(79, 142, 247, 0.15);
+    --text: #e2e8f8;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  /* Container simulating Visual Depth */
+  .perspective-container {
+    perspective: 1000px;
+    display: flex;
+    gap: 40px;
+    padding: 50px;
+  }
+
+  /* Layer Card with Lighting Effects */
+  .layer-card {
+    width: 180px;
+    height: 120px;
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Base Visual Depth: Low elevation shadow */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* The "Lighting Effect" - Surface Glow */
+  .layer-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: radial-gradient(circle at center, var(--glow), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* High Elevation on Hover (Visual Depth Shift) */
+  .layer-card:hover {
+    transform: translateZ(50px) translateY(-10px);
+    border-color: var(--accent);
+    /* High elevation lighting: Larger, softer shadow */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 20px var(--glow);
+  }
+
+  .layer-card:hover::before {
+    opacity: 1;
+  }
+
+  .layer-name { font-size: 14px; letter-spacing: 1px; z-index: 1; }
+  
+  .depth-badge {
+    margin-top: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    background: #1a1f35;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--accent);
+    z-index: 1;
+  }
+
+  /* Dashboard to show stats */
+  .stats-board {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 18, 29, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    font-size: 12px;
+    display: none;
+    z-index: 100;
+  }
